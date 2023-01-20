@@ -4,9 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'primeng/accordion';
 import { MenuItem } from 'primeng/api';                  
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Moduls1 } from './moduls/moduls1/moduls1.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    Moduls1,
   ],
   providers: [],
   bootstrap: [AppComponent]
