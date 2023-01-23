@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeIcons, PrimeNGConfig } from 'primeng/api';
+import { AppConfigService, AppConfigSettings } from './fake-backend/services/app-config.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,15 @@ export class AppComponent {
 
   title = 'angular-app';
 
-  constructor(private primengConfig: PrimeNGConfig) { }
+  constructor (private AppConfigService: AppConfigService, private primengConfig: PrimeNGConfig) {
+    const config: AppConfigSettings = {
+      socialIcons: [
+        { imageFile: 'C:\Users\MSI\angular-app\src\favicon', alt: 'Angular', url: 'http://angular.io' }
+      ],
+    showUserControls: true
+    };
+    AppConfigService.configure(config)
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true;

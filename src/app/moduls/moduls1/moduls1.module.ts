@@ -4,11 +4,13 @@ import { AppBodyComponent } from "./app-body/app-body.component";
 import { AppHeaderComponent } from "./app-header/app-header.component";
 import { AppFooterComponent } from "./app-footer/app-footer.component";
 import { AppContentComponent } from "./app-content/app-content.component";
+import { AppConfigService } from "src/app/fake-backend/services/app-config.service";
 
 @NgModule ({
     declarations: [AppBodyComponent, AppHeaderComponent, AppContentComponent, AppFooterComponent],
     exports: [AppBodyComponent],
-    imports: [CommonModule]
+    imports: [CommonModule],
+    providers: [AppConfigService]
 })
 
 export class Moduls1 {} 
