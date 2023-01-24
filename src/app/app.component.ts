@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeIcons, PrimeNGConfig } from 'primeng/api';
-import { AppConfigService, AppConfigSettings } from './fake-backend/services/app-config.service';
+import { AppConfigService, AppConfigSettings } from './moduls/moduls1/service/app-config.service';
 
 @Component({
   selector: 'app-root',
