@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'primeng/accordion';
-import { MenuItem } from 'primeng/api';                  
+import { HttpClientModule } from "@angular/common/http";           
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { Moduls1 } from './moduls/moduls1/moduls1.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     Moduls1,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

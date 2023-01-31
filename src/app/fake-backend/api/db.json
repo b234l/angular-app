@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "jonhdoe@gmail.com",
+      "password": "123abc"
+    },
+    {
+      "id": 2,
+      "login": "mickeymouse@gmail.com",
+      "password": "pipipitcpip"
+    },
+    {
+      "id": 3,
+      "login": "mrAnderson@gmail.com",
+      "password": "neooo"
+    }
+  ]
+}
