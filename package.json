@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "api": "json-server api/routes.json --no-cors=true"
+    "api": "json-server src/app/fake-backend/api/db.json --routes src/app/fake-backend/api/routes.json --no-cors=true"
   },
   "private": true,
   "dependencies": {
