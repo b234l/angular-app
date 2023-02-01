@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "jonhdoe@gmail.com",
+      "password": "123abc"
+    },
+    {
+      "id": 2,
+      "login": "mickeymouse@gmail.com",
+      "password": "Hello people"
+    },
+    {
+      "id": 3,
+      "login": "mrAnderson@gmail.com",
+      "password": "neooo"
+    },
+    {
+      "id": 4,
+      "login": "dodge@gmail.com",
+      "password": "v8hemi"
+    },
+    {
+      "id": 5,
+      "login": "bon_jovi@gmail.com",
+      "password": "itsmylife"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PrimeIcons, PrimeNGConfig } from 'primeng/api';
 import { AppConfigService, AppConfigSettings } from './moduls/moduls1/service/app-config.service';
+import { UserService } from './fake-backend/services/user-service';
+import { user } from './fake-backend/models/user';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +13,43 @@ export class AppComponent {
 
   title = 'angular-app';
 
-  constructor (private AppConfigService: AppConfigService, private primengConfig: PrimeNGConfig) {
+  constructor(private AppConfigService: AppConfigService, private primengConfig: PrimeNGConfig, private userService: UserService) {
+    
     const config: AppConfigSettings = {
       socialIcons: [
         { imageFile: 'C:\Users\MSI\angular-app\src\favicon', alt: 'Angular', url: 'http://angular.io' }
       ],
+
     showUserControls: true
     };
     AppConfigService.configure(config)
+
+    this.getUsers();
   }
+
+  users!:user[];
+  user:user = { id: 0, login: '', password: '' };
+
+  addUser() {
+    this.userService.addUser(this.user).subscribe({
+      next: (res) => {
+        this.users.push(this.user);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+  
+  private getUsers() {
+    this.userService.getUsers().subscribe({
+      next: (res) => {
+        this.users = res;
+      },
+      error: (err) => console.log(err)
+    })
+  }
+  
 
   ngOnInit() {
     this.primengConfig.ripple = true;

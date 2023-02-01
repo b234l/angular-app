@@ -7,7 +7,7 @@ import { user } from "../models/user";
 })
 
 export class UserService {
-  baseUrl="http://localhost:3000/users";
+  baseUrl ="api/users";
   constructor(private http:HttpClient) {
 
   }
@@ -16,7 +16,7 @@ export class UserService {
     return this.http.get<user[]>(this.baseUrl);
   }
 
-  addUsers(user:user) {
+  addUser(user:user) {
     return this.http.post(this.baseUrl, user);
   }
 }
