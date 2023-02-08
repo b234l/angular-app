@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeIcons, PrimeNGConfig } from 'primeng/api';
-import { AppConfigService, AppConfigSettings } from './moduls/moduls1/service/app-config.service';
+import { AppConfigService, AppConfigSettings } from './moduls/main-components/service/app-config.service';
 import { UserService } from './fake-backend/services/user-service';
 import { user } from './fake-backend/models/user';
 

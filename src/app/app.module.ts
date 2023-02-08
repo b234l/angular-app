@@ -7,7 +7,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Moduls1 } from './moduls/moduls1/moduls1.module';
+import { MainComponents } from './moduls/main-components/main-components.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { Moduls1 } from './moduls/moduls1/moduls1.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    Moduls1,
+    MainComponents,
     FormsModule,
     HttpClientModule
   ],
