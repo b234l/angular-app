@@ -1,14 +1,39 @@
 # AngularApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+**This is my graduation project**
 
-## Development server
+*This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.*
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Development 
 
-## Code scaffolding
+ *Necessary for project's work:*
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Run `ng serve ` for a dev server. Navigate to `http://localhost:4200/ ` 
+
+```
+    $ ng serve 
+```
+
+- Or use `ng serve -o ` to automatically open peoject in browser
+
+```
+    $ ng serve -o
+```
+
+2. Run `npm run api ` for a local server with database. 
+Navigate to `http://localhost:3000/api `
+
+```
+    $ npm run api
+```
+
+- this command must be executed from the following directory: `src/app/fake-backend/api/ ` 
+
+```
+    $ cd src/app/fake-backend/api/
+```
+
+- user data is stored at ` http://localhost:3000/api/users`
 
 ## Build
 
