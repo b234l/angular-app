@@ -9,9 +9,9 @@ import { AlertService } from 'src/app/fake-backend/services/alert-service';
 @Component({ templateUrl: 'add-remove.component.html' })
 
 export class AddRemoveComponent implements OnInit {
-  form: FormGroup;
-  id: string;
-  isAddMode: boolean;
+  form!: FormGroup;
+  id!: string;
+  isAddMode!: boolean;
   loading = false;
   submitted = false;
 
