@@ -41,7 +41,13 @@ export class MenuComponent implements OnInit {
           { label: 'Информация об экзамене', icon: '', routerLink: '' },
           { label: 'Дополнительные сведения', icon: '', routerLink: '' }
         ]
-    }
-  ]
+      },
+      {
+        label: 'fake-backend',
+        items: [
+          { label: 'Users', routerLink: '/users'}
+        ]
+      }
+    ]
   }
 }

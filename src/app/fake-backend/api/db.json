@@ -19,6 +19,23 @@
       "id": 4,
       "login": "check1@gmail.com",
       "password": "check1"
+    },
+    {
+      "id": 5,
+      "login": "check2@gmail.com",
+      "password": "check2"
+    },
+    {
+      "id": 6,
+      "login": "check3@gmail.com",
+      "password": "check3"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "text": "123",
+      "picture": ""
     }
   ]
 }
