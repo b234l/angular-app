@@ -1,0 +1,65 @@
+<h2>Users</h2>
+
+<ul>
+  <li *ngFor="let user of users" class="container">
+    <p class="id">{{user.id}}</p>
+    <p class="name">{{user.login}}</p>
+    <p class="password">{{user.password}}</p>
+  </li>
+</ul>
+
+<ul class="users">
+  <li *ngFor="let user of users">
+    <a routerLink="/detail/{{user.id}}">
+      <span class="badge">{{user.id}}</span> {{user.login}}
+    </a>
+    <button type="button" class="delete" title="delete user" (click)="delete(user)">x</button>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ul>
+  <li *ngFor="let user of users" class="user-container" (click)="onSelectedUser(user)"
+    [class.selected]="user === selectedUser">
+    <p class="login">{{user.login}}</p>
+    <p class="password">{{user.password}}</p>
+  </li>
+</ul>
+
+<div class="user-container-2">
+  <input [(ngModel)]="userLogin" class="input-item">
+  <div *ngIf="user" class="user-details">
+    id: {{user[0].id}} name: {{user[0].name}}
+  </div>
+</div>
+<div>
+  <a (click)="onGetUser()">Получить по id</a>
+  <a (click)="onAddUser(user.login)">Добавить пользователя</a>
+  <a (click)="onUpdateUser()">Обновить пользователя</a>
+  <a (click)="onDeleteUser()">Удалить пользователя</a>
+</div> -->
