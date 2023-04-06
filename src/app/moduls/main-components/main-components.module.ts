@@ -7,13 +7,15 @@ import { AppContentComponent } from "./body-components/app-content/app-content.c
 import { AppConfigService } from "./service/app-config.service";
 import { MenuComponent } from "../secondary-components/menu/menu.component";
 import { MenubarModule } from "primeng/menubar";
+import { LearningComponent } from "../secondary-components/learning/learning.component";
 
 @NgModule ({
     declarations: [AppBodyComponent, 
         AppHeaderComponent,
         AppContentComponent, 
         AppFooterComponent, 
-        MenuComponent
+        MenuComponent,
+        LearningComponent
     ],
     exports: [AppBodyComponent],
     imports: [CommonModule, MenubarModule],
