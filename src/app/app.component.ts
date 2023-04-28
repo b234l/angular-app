@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PrimeIcons, PrimeNGConfig } from 'primeng/api';
 import { AppConfigService, AppConfigSettings } from './moduls/main-components/service/app-config.service';
 import { UserService } from './fake-backend/services/user-service';
-import { user } from './fake-backend/models/user';
+import { User } from './fake-backend/models/user';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +27,10 @@ export class AppComponent {
     this.getUsers();
   }
 
-  users!:user[];
-  user:user = { id: 0, login: '', password: '' };
+  users!:User[];
+  user:User = {
+    id: 0, login: '', password: ''
+  };
 
   addUser() {
     this.userService.addUser(this.user).subscribe({

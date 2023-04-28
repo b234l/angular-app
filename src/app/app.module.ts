@@ -11,11 +11,13 @@ import { UserService } from './fake-backend/services/user-service';
 import { AppComponent } from './app.component';
 import { MainComponents } from './moduls/main-components/main-components.module';
 import { UsersComponent } from './moduls/accounting-components/users/users.component';
+import { LoginComponent } from './moduls/accounting-components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

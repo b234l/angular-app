@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
         label: 'Профиль',
         icon: 'pi pi-fw pi-users',
         items: [
-          { label: 'Мой профиль', icon: 'pi pi-fw pi-users', routerLink: '/sign-in' },
+          { label: 'Мой профиль', icon: 'pi pi-fw pi-users', routerLink: '/login' },
           { label: 'Войти в аккаунт', icon: 'pi pi-fw pi-user-plus', routerLink: '/sign-up' }
           ]
       },
@@ -41,7 +41,13 @@ export class MenuComponent implements OnInit {
           { label: 'Информация об экзамене', icon: '', routerLink: '/info/exam-info' },
           { label: 'Дополнительные сведения', icon: '', routerLink: '/info/additional;' }
         ]
-    }
-  ]
+      },
+      {
+        label: 'Dev',
+        items: [
+          { label: 'User', icon: '', routerLink: '/users'}
+        ]
+      }
+    ]
   }
 }
