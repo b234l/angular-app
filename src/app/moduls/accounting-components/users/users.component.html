@@ -1,5 +1,4 @@
 <h2>Users</h2>
-
 <form>
   <div class="form-group">
     <label for="login">Login:</label>
@@ -13,9 +12,7 @@
 
   <button (click)="addUser(newUser.login, newUser.password)" class="btn btn-primary">Add User</button>
 </form>
-
 <br>
-
 <table class="table">
   <thead>
     <tr>
@@ -25,15 +22,30 @@
       <th></th>
     </tr>
   </thead>
-
   <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.id }}</td>
       <td>{{ user.login }}</td>
       <td>{{ user.password }}</td>
       <td>
+        <button (click)="selectUser(user)" class="btn btn-warning">Edit</button>
         <button (click)="deleteUser(user)" class="btn btn-danger">Delete</button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<form *ngIf="selectedUser.id > 0" (ngSubmit)="updateUser()">
+  <div class="form-group">
+    <label for="login">Login:</label>
+    <input type="text" name="login" [(ngModel)]="selectedUser.login" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" name="password" [(ngModel)]="selectedUser.password" class="form-control" required />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update User</button>
+  <button type="button" (click)="selectedUser={id:0, login:'', password:''}" class="btn btn-dark">Cancel</button>
+</form>

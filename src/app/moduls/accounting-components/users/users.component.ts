@@ -12,6 +12,7 @@ export class UsersComponent implements OnInit {
 
   users: User[] = [];
   newUser: User = { id: 0, login: '', password: '' };
+  selectedUser: User = { id: 0, login: '', password: '' };
 
   constructor (private userService: UserService) { }
 
@@ -39,11 +40,21 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  selectUser(user: User) {
+    this.selectedUser = { ...user };
+  }
+
+  updateUser() {
+    this.userService.updateUser(this.selectedUser).subscribe(user => {
+      const index = this.users.findIndex(u => u.id === user.id);
+      this.users[index] = user;
+      this.selectedUser = { id: 0, login: '', password: '' };
+    });
+  }
+
   deleteUser(user: User) {
     this.users = this.users.filter(u => u !== user);
     this.userService.deleteUser(user.id).subscribe();
   }
-
-
 }
 

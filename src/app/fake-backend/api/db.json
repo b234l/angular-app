@@ -19,6 +19,11 @@
       "id": 4,
       "login": "pleaseduser@gmail.com",
       "password": "itswork!"
+    },
+    {
+      "id": 5,
+      "login": "edittest-success@gmail.com",
+      "password": "success"
     }
   ]
 }
