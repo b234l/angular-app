@@ -12,12 +12,16 @@ import { AppComponent } from './app.component';
 import { MainComponents } from './moduls/main-components/main-components.module';
 import { UsersComponent } from './moduls/accounting-components/users/users.component';
 import { LoginComponent } from './moduls/accounting-components/login/login.component';
+import { ErrorNotFoundComponent } from './moduls/secondary-components/error-not-found/error-not-found.component';
+import { QuestionsComponent } from './moduls/task-components/questions/questions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     LoginComponent,
+    ErrorNotFoundComponent,
+    QuestionsComponent,
   ],
   imports: [
     BrowserModule,

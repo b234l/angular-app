@@ -25,5 +25,21 @@
       "login": "edittest-success@gmail.com",
       "password": "success"
     }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "topic": 1,
+      "section": 1,
+      "text": "Разрешён ли Вам съезд на дорогу с грунтовым покрытием?",
+      "answers": [
+        {
+          "id": 1,
+          "question_id": 1,
+          "text": "Разрешён",
+          "correct": true
+        }
+      ]
+    }
   ]
 }

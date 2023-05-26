@@ -6,6 +6,7 @@ import { LearningComponent } from './moduls/secondary-components/learning/learni
 import { LoginComponent } from './moduls/accounting-components/login/login.component';
 import { UsersComponent } from './moduls/accounting-components/users/users.component';
 import { ErrorNotFoundComponent } from './moduls/secondary-components/error-not-found/error-not-found.component';
+import { QuestionsComponent } from './moduls/task-components/questions/questions.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path: 'learning', component: LearningComponent},
       {path: 'login', component: LoginComponent},
       {path: 'users', component: UsersComponent},
+      {path: 'questions', component: QuestionsComponent},
       {path: '**', component: ErrorNotFoundComponent}
     ]
   }

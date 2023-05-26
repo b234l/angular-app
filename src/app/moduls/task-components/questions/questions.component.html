@@ -1,0 +1,51 @@
+<table>
+  <thead>
+    <tr>
+      <th>Вопрос</th>
+      <th>Ответы</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of questions">
+      <td>{{ question.text }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let answer of question.answers">
+            <span [class.correct]="answer.isCorrect">{{ answer.text }}</span>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <button (click)="editQuestion(question)">Редактировать</button>
+        <button (click)="deleteQuestion(question)">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form *ngIf="selectedQuestion">
+  <h2 *ngIf="isNewQuestion">Новый вопрос</h2>
+  <h2 *ngIf="!isNewQuestion">Редактирование вопроса</h2>
+  <label>
+    Текст вопроса:
+    <textarea [(ngModel)]="selectedQuestion.text"></textarea>
+  </label>
+  <button *ngIf="isNewQuestion" (click)="addQuestion()">Добавить</button>
+  <button *ngIf="!isNewQuestion" (click)="updateQuestion()">Сохранить</button>
+</form>
+
+<form *ngIf="selectedAnswer">
+  <h2 *ngIf="isNewAnswer">Новый ответ</h2>
+  <h2 *ngIf="!isNewAnswer">Редактирование ответа</h2>
+  <label>
+    Текст ответа:
+    <input type="text" [(ngModel)]="selectedAnswer.text">
+  </label>
+  <label>
+    Правильный ответ:
+    <input type="checkbox" [(ngModel)]="selectedAnswer.isCorrect">
+  </label>
+  <button *ngIf="isNewAnswer" (click)="addAnswer()">Добавить</button>
+  <button *ngIf="!isNewAnswer" (click)="updateAnswer()">Сохранить</button>
+</form>

@@ -45,7 +45,8 @@ export class MenuComponent implements OnInit {
       {
         label: 'Dev',
         items: [
-          { label: 'User', icon: '', routerLink: '/users'}
+          { label: 'User', icon: '', routerLink: '/users'},
+          { label: 'Questions', icon: '', routerLink: '/questions'}
         ]
       }
     ]
