@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
-import { MessageService } from "./messange-service";
 import { User } from "../models/user";
 
 @Injectable({
@@ -15,7 +14,6 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
   ) { }
 
   httpOptions = {
