@@ -1,21 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "login": "jonhdoe@gmail.com",
-      "password": "123abc"
-    },
-    {
-      "id": 2,
-      "login": "mickeymouse@gmail.com",
-      "password": "pipipitcpip"
-    },
-    {
-      "id": 3,
-      "login": "mrAnderson@gmail.com",
-      "password": "neooo"
-    },
-    {
       "id": 4,
       "login": "pleaseduser@gmail.com",
       "password": "itswork!"
@@ -24,6 +9,11 @@
       "id": 5,
       "login": "edittest-success@gmail.com",
       "password": "success"
+    },
+    {
+      "id": 6,
+      "login": "final-check@gmail.com",
+      "password": "still-work"
     }
   ],
   "questions": [
@@ -38,6 +28,38 @@
           "question_id": 1,
           "text": "Разрешён",
           "correct": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "topic": "1",
+      "section": "1",
+      "text": "В каких случаях разрешается наезжать на прерывистые линии разметки, разделяющие проезжую часть на полосы движения?",
+      "answers": [
+        {
+          "id": 0,
+          "questionId": 0,
+          "text": "только если на дороге нет других транспортных средств",
+          "isCorrect": false
+        },
+        {
+          "id": 0,
+          "questionId": 0,
+          "text": "только при движении в тёмное время суток",
+          "isCorrect": false
+        },
+        {
+          "id": 0,
+          "questionId": 0,
+          "text": "только при перестроении",
+          "isCorrect": true
+        },
+        {
+          "id": 0,
+          "questionId": 0,
+          "text": "во всех перечисленных случаях",
+          "isCorrect": false
         }
       ]
     }
