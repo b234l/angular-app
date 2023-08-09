@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccordionModule } from 'primeng/accordion';
 import { HttpClientModule } from "@angular/common/http";    
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,10 +14,6 @@ import { UsersComponent } from './moduls/accounting-components/users/users.compo
 import { LoginComponent } from './moduls/accounting-components/login/login.component';
 import { ErrorNotFoundComponent } from './moduls/secondary-components/error-not-found/error-not-found.component';
 import { QuestionsComponent } from './moduls/task-components/questions/questions.component';
-import { RegisterComponent } from './moduls/accounting-components/register/register.component';
-import { ExamComponent } from './moduls/task-components/exam/exam.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -25,18 +22,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     ErrorNotFoundComponent,
     QuestionsComponent,
-    RegisterComponent,
-    ExamComponent,
-    
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MainComponents,
     FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

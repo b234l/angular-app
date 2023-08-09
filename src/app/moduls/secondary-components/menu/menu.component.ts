@@ -16,8 +16,8 @@ export class MenuComponent implements OnInit {
         label: 'Профиль',
         icon: 'pi pi-fw pi-users',
         items: [
-          { label: 'Войти в профиль', icon: 'pi pi-fw pi-users', routerLink: '/login' },
-          { label: 'Регистрация', icon: 'pi pi-fw pi-user-plus', routerLink: '/register' }
+          { label: 'Мой профиль', icon: 'pi pi-fw pi-users', routerLink: '/login' },
+          { label: 'Войти в аккаунт', icon: 'pi pi-fw pi-user-plus', routerLink: '/sign-up' }
           ]
       },
       {
@@ -30,20 +30,20 @@ export class MenuComponent implements OnInit {
       {
         label: 'Тестовые задания',
         items: [
-          { label: 'Экзамен', icon: '', routerLink: '/exam' },
-          { label: 'Марафон', icon: '', routerLink: '/marathon' }
+          { label: 'Экзамен', icon: '', routerLink: '/tasks/exam' },
+          { label: 'Марафон', icon: '', routerLink: '/tasks/marathon' }
         ]
       },
       {
         label: 'Полезная информация',
         items: [
-          { label: 'Правила дорожного движения', icon: '', routerLink: '/traffic-regulations' },
-          { label: 'Информация об экзамене', icon: '', routerLink: '/exam-info' },
-          { label: 'Дополнительные сведения', icon: '', routerLink: '/additional-information' }
+          { label: 'Правила дорожного движения', icon: '', routerLink: '/info/traffic-rules' },
+          { label: 'Информация об экзамене', icon: '', routerLink: '/info/exam-info' },
+          { label: 'Дополнительные сведения', icon: '', routerLink: '/info/additional;' }
         ]
       },
       {
-        label: 'Development',
+        label: 'Dev',
         items: [
           { label: 'User', icon: '', routerLink: '/users'},
           { label: 'Questions', icon: '', routerLink: '/questions'}
