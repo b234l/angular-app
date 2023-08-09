@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-footer.component.scss']
 })
 export class AppFooterComponent implements OnInit {
-  title = 'Тверской Государственный Технический Университет';
+  title = 'Королёв Алексей, ТвГТУ';
   year = 2023;
 
   constructor() {}
