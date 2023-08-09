@@ -1,133 +1,150 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators, FormControl, FormGroupName, FormArray } from '@angular/forms';
 import { Question, Answer } from 'src/app/fake-backend/models/question';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from 'src/app/fake-backend/services/question-service';
-
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit {
 
-  questions: Question[] = [];
+export class QuestionsComponent  {
+  
+  questions: Question[] = []
+  answers: Answer[] = []
+  // newQuestion: Question = { id: 0, topic: 0, section: 0, text: '', answers:[] };
+  // newAnswer: Answer = { id: 0, questionId: 0, text: '', isCorrect: true || false  }
+  editingQuestion: Question | undefined; 
+  editQuestionForm!: FormGroup; 
+  questionForm: FormGroup;
 
-  selectedQuestion: Question = { id: 0, topic: 0, section: 0, text: '', answers: [] };
-  isNewQuestion: boolean = false;
-  selectedAnswer: Answer = { id: 0, questionId: 0, text: '', isCorrect: false };
-  isNewAnswer: boolean = false;
-
-  constructor( private questionsService: QuestionsService ) {
-    
+  constructor(private formBuilder: FormBuilder, private questionsService: QuestionsService) {
+    this.questionForm = this.formBuilder.group({
+      topic: ['', Validators.required],
+      section: ['', Validators.required],
+      text: ['', Validators.required],
+      answers: this.formBuilder.array([
+        this.createAnswerGroup()
+      ])
+    });
   }
 
-  ngOnInit() {
+  ngOnInit(){
     this.getQuestions();
-  }
 
+    this.getQuestions();
+    this.editQuestionForm = this.formBuilder.group({
+      topic: ['', Validators.required],
+      section: ['', Validators.required],
+      text: ['', Validators.required],
+      answers: this.formBuilder.array([], Validators.required)
+    });
+  }
 
   getQuestions(): void {
     this.questionsService.getQuestions()
       .subscribe(questions => this.questions = questions);
   }
 
-  getAnswers(questionId: number): void {
-    this.questionsService.getAnswersByQuestionId(questionId)
-      .subscribe(answers => {
-        const index = this.questions.findIndex(q => q.id === questionId);
-        this.questions[index].answers = answers;
-      });
-  }
+  // addQuestion(topic: number, section: number, text: string, answers: []){
+  //   topic = topic;
+  //   section = section;
+  //   text = text.trim();
+  // }
 
-  addQuestion(): void {
-    this.selectedQuestion.id = this.questions.length + 1;
-    this.questions.push(this.selectedQuestion);
-    this.selectedQuestion = { id: 0, topic: 0, section: 0, text: '', answers: [] }
+  createAnswerGroup(): FormGroup {
+    return this.formBuilder.group({
+      text: ['', Validators.required],
+      isCorrect: [false]
+    });
   }
 
   editQuestion(question: Question): void {
-    this.selectedQuestion = question;
-    this.selectedAnswer = { id: 0, questionId: 0, text: '', isCorrect: false };;
+    this.editingQuestion = question;
+    this.editQuestionForm.patchValue({
+      topic: question.topic,
+      section: question.section,
+      text: question.text,
+      answers: question.answers.map(answer => this.formBuilder.group({
+        text: answer.text,
+        isCorrect: answer.isCorrect
+      }))
+    })
   }
 
-  updateQuestion() {
-    const index = this.questions.findIndex(q => q.id === this.selectedQuestion.id);
-    this.questions[index] = this.selectedQuestion;
-    this.selectedQuestion = { id: 0, topic: 0, section: 0, text: '', answers: [] }
+  deleteQuestion(id: number): void {
+    this.questions = this.questions.filter(question => question.id !== id);
+    this.questionsService.deleteQuestion(id).subscribe();
   }
 
-  saveQuestion(): void {
-    if (this.isNewQuestion) {
-      this.questionsService.addQuestion(this.selectedQuestion)
-        .subscribe(question => {
-          this.questions.push(question);
-        });
-    } else {
-      this.questionsService.updateQuestion(this.selectedQuestion)
-        .subscribe(() => {
-          const index = this.questions.findIndex(q => q.id === this.selectedQuestion.id);
-          this.questions[index] = { ...this.selectedQuestion };
-        });
+  addEditAnswer(): void {
+    (this.editQuestionForm.controls['answers'] as FormArray).push(
+      this.formBuilder.group({
+        text: ['', Validators.required],
+        isCorrect: false
+      })
+    );
+  }
+
+  removeEditAnswer(index: number): void {
+    (this.editQuestionForm.controls['answers'] as FormArray).removeAt(index);
+  }
+
+  onEditSubmit(): void {
+    if (this.editQuestionForm.valid) {
+      const updatedQuestion = {
+        ...this.editingQuestion,
+        ...this.editQuestionForm.value,
+        answers: this.editQuestionForm.value.answers.map((answer: Answer) => ({ ...answer }))
+      };
+      this.questionsService.updateQuestion(updatedQuestion).subscribe(question => {
+        this.editingQuestion = undefined;
+        const foundQuestion = this.questions.find(q => q.id === question.id);
+        if (foundQuestion) {
+          Object.assign(foundQuestion, question);
+        }
+      });
     }
-    this.cancelQuestion();
   }
 
-  deleteQuestion(question: Question): void {
-    const index = this.questions.findIndex(q => q.id === question.id);
-    this.questions.splice(index, 1);
+  cancelEdit(): void {
+    this.editingQuestion = undefined;
+    this.editQuestionForm.reset();
   }
-
-  cancelQuestion(): void {
-    this.selectedQuestion = { id: 0, topic: 0, section: 0, text: '', answers: [] };
-    this.isNewQuestion = false;
-    this.selectedAnswer = { id: 0, questionId: 0, text: '', isCorrect: false };;
-    this.isNewAnswer = false;
-  }
-
+  
   addAnswer(): void {
-    const answer = { id: 0, questionId: this.selectedQuestion.id, text: this.selectedAnswer.text, isCorrect: this.selectedAnswer.isCorrect };
-    this.selectedQuestion.answers.push(answer);
-    this.selectedAnswer = { id: 0, questionId: this.selectedQuestion.id, text: '', isCorrect: false } as Answer;
+    const answers = this.questionForm.get('answers') as FormArray;
+    answers.push(this.createAnswerGroup());
   }
 
-  editAnswer(answer: Answer): void {
-    this.isNewAnswer = false;
-    this.selectedAnswer = { ...answer };
+  removeAnswer(index: number): void {
+    const answers = this.questionForm.get('answers') as FormArray;
+    answers.removeAt(index);
   }
 
-  saveAnswer(): void {
-    if (this.isNewAnswer) {
-      this.questionsService.addAnswer(this.selectedAnswer)
-        .subscribe(answer => {
-          this.selectedQuestion.answers.push(answer);
-        });
-    } else {
-      this.questionsService.updateAnswer(this.selectedAnswer)
-        .subscribe(() => {
-          const index = this.selectedQuestion.answers.findIndex(a => a.id === this.selectedAnswer.id);
-          this.selectedQuestion.answers[index] = { ...this.selectedAnswer };
-        });
-    }
-    this.cancelAnswer();
-  }
 
-  deleteAnswer(answer: Answer): void {
-    if (confirm(`Are you sure you want to delete the answer '${answer.text}'?`)) {
-      this.selectedQuestion.answers = this.selectedQuestion.answers.filter(a => a !== answer);
-      this.questionsService.deleteAnswer(answer.id).subscribe();
-    }
-  }
-
-  cancelAnswer(): void {
-    this.selectedAnswer = { id: 0, questionId: 0, text: '', isCorrect: false };
-    this.isNewAnswer = false;
-  }
-
-  updateAnswer() {
-    const index = this.selectedQuestion.answers.findIndex(a => a.id === this.selectedAnswer.id);
-    this.selectedQuestion.answers[index] = this.selectedAnswer;
-    this.selectedAnswer = { id: 0, questionId: 0, text: '', isCorrect: false };;
+  onSubmit() {
+    const questionData = this.questionForm.value;
+    const question: Question = {
+      id: questionData ? (questionData.id + 1) : 1,
+      topic: questionData.topic,
+      section: questionData.section,
+      text: questionData.text,
+      answers: questionData.answers.map((answerData: any) => {
+        const answer: Answer = {
+          id: answerData ? (answerData.id + 1) : 1,
+          questionId: questionData.id,
+          text: answerData.text,
+          isCorrect: answerData.isCorrect
+        };
+        return answer;
+      })
+    };
+    this.questionsService.addQuestion(question).subscribe((newQuestion) => {
+      console.log('New question added with id:', newQuestion.id);
+      this.questionForm.reset();
+    });
   }
 }

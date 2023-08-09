@@ -1,51 +1,80 @@
+<h2>Existing Questions</h2>
 <table>
   <thead>
     <tr>
-      <th>Вопрос</th>
-      <th>Ответы</th>
-      <th>Действия</th>
+      <th>ID</th>
+      <th>Topic</th>
+      <th>Section</th>
+      <th>Text</th>
+      <th>Answers</th>
+      <th>Action</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let question of questions">
+      <td>{{ question.id }}</td>
+      <td>{{ question.topic }}</td>
+      <td>{{ question.section }}</td>
       <td>{{ question.text }}</td>
       <td>
         <ul>
-          <li *ngFor="let answer of question.answers">
-            <span [class.correct]="answer.isCorrect">{{ answer.text }}</span>
-          </li>
+          <li *ngFor="let answer of question.answers">{{ answer.text }} ({{ answer.isCorrect ? 'correct' : 'incorrect'
+            }})</li>
         </ul>
       </td>
       <td>
-        <button (click)="editQuestion(question)">Редактировать</button>
-        <button (click)="deleteQuestion(question)">Удалить</button>
+        <button type="button" (click)="editQuestion(question)">Edit</button>
+        <button type="button" (click)="deleteQuestion(question.id)">Delete</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<form *ngIf="selectedQuestion">
-  <h2 *ngIf="isNewQuestion">Новый вопрос</h2>
-  <h2 *ngIf="!isNewQuestion">Редактирование вопроса</h2>
-  <label>
-    Текст вопроса:
-    <textarea [(ngModel)]="selectedQuestion.text"></textarea>
-  </label>
-  <button *ngIf="isNewQuestion" (click)="addQuestion()">Добавить</button>
-  <button *ngIf="!isNewQuestion" (click)="updateQuestion()">Сохранить</button>
-</form>
-
-<form *ngIf="selectedAnswer">
-  <h2 *ngIf="isNewAnswer">Новый ответ</h2>
-  <h2 *ngIf="!isNewAnswer">Редактирование ответа</h2>
-  <label>
-    Текст ответа:
-    <input type="text" [(ngModel)]="selectedAnswer.text">
-  </label>
-  <label>
-    Правильный ответ:
-    <input type="checkbox" [(ngModel)]="selectedAnswer.isCorrect">
-  </label>
-  <button *ngIf="isNewAnswer" (click)="addAnswer()">Добавить</button>
-  <button *ngIf="!isNewAnswer" (click)="updateAnswer()">Сохранить</button>
-</form>
+<div *ngIf="editQuestion">
+  <h3>Edit Question</h3>
+  <form [formGroup]="editQuestionForm" (ngSubmit)="onSubmit()">
+    <label>
+      Topic:
+      <input type="text" formControlName="topic" required>
+    </label>
+    <br>
+    <label>
+      Section:
+      <input type="text" formControlName="section" required>
+    </label>
+    <br>
+    <label>
+      Question Text:
+      <textarea formControlName="text" required></textarea>
+    </label>
+    <br>
+    <table formArrayName="answers">
+      <thead>
+        <tr>
+          <th>Answer Text</th>
+          <th>Correct Answer ?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let answer of questionForm.value.answers; let i = index;" [formGroupName]="i">
+          <td>
+            <input type="text" formControlName="text" required>
+          </td>
+          <td align="center">
+            <input type="checkbox" formControlName="isCorrect">
+          </td>
+          <td align="center">
+            <button type="button" (click)="removeAnswer(i)">Remove Answer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" (click)="addAnswer()">Add Answer</button>
+    <br>
+    <br>
+    <button type="submit">Save Question</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+</div>
