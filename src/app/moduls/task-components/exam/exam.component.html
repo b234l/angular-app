@@ -1,0 +1,24 @@
+<div>
+  <h3>Вопрос {{ currentQuestion + 1 }}: {{ questions[currentQuestion].text }}</h3>
+  <div>
+    <p>Выберите один из вариантов ответа</p>
+  </div>
+  <div *ngFor="let answer of questions[currentQuestion].answers">
+    <div>
+      <label>
+        <input type="radio" name="answer" [value]="answer.id" [(ngModel)]="selectedAnswerId"
+          (change)="onAnswerSelected(answer)">
+        {{ answer.text }}
+      </label>
+    </div>
+  </div>
+  <ng-container *ngIf="selectedAnswerId !== 0; else noAnswerSelected">
+    <div>
+      <button [disabled]="!isAllAnswersOnCurrentQuestion() || !isAnswerCorrect()" (click)="getNextQuestion()">
+        {{ isLastQuestion() ? 'Закончить' : 'Ответить' }}
+      </button>
+      <button *ngIf="!isLastQuestion()" (click)="getNextQuestion()">Следующий вопрос</button>
+    </div>
+  </ng-container>
+  <ng-template #noAnswerSelected></ng-template>
+</div>
