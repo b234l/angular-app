@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../models/question';
 import { Answer } from '../models/question';
@@ -8,11 +8,16 @@ import { Answer } from '../models/question';
   providedIn: 'root'
 })
 export class QuestionsService {
-  apiUrl = 'http://localhost:3000/api/questions';
+  private apiUrl = 'api/questions';
 
   constructor(
     private http: HttpClient,
   ) { }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
 
   getQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(this.apiUrl);
