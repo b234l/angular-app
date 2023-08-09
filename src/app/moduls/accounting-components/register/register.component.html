@@ -1,0 +1,13 @@
+<h1>Регистрация</h1>
+<div>
+  <div>
+    Логин: <input type="text" [(ngModel)]="user.login" />
+  </div>
+  <div>
+    Пароль: <input type="password" [(ngModel)]="user.password" />
+  </div>
+  <div>
+    Подтвердите пароль: <input type="password" [(ngModel)]="confirmPassword" />
+  </div>
+  <button (click)="register()">Register</button>
+</div>
