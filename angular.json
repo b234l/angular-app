@@ -104,6 +104,68 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/angular-app/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss",
+            "externalDependencies": [
+              "@nestjs/microservices",
+              "@nestjs/microservices/microservices-module",
+              "@nestjs/websockets",
+              "@nestjs/websockets/socket-module",
+              "cache-manager"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "optimization": false
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular-app:build:development",
+              "serverTarget": "angular-app:server:development"
+            },
+            "production": {
+              "browserTarget": "angular-app:build:production",
+              "serverTarget": "angular-app:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-app:build:production",
+              "serverTarget": "angular-app:server:production"
+            },
+            "development": {
+              "browserTarget": "angular-app:build:development",
+              "serverTarget": "angular-app:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
